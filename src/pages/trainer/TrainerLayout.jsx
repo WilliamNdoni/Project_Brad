@@ -3,9 +3,9 @@ import { useNavigate, Outlet, useLocation } from "react-router-dom";
 
 const navItems = [
   { label: "Dashboard", path: "/trainer/dashboard", icon: "▣" },
-  { label: "Clients", path: "/trainer/clients", icon: "◉" },
-  { label: "Pending", path: "/trainer/pending", icon: "◎" },
-  { label: "Payments", path: "/trainer/payments", icon: "◈" },
+  { label: "Active Clients", path: "/trainer/clients", icon: "◉" },
+  { label: "Pending Approvals", path: "/trainer/pending", icon: "◎" },
+  { label: "Payments / Transactions", path: "/trainer/payments", icon: "◈" },
 ];
 
 export default function TrainerLayout() {
@@ -32,11 +32,12 @@ export default function TrainerLayout() {
 
       {/* sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full z-30 flex flex-col
-                    transition-transform duration-300 lg:translate-x-0 lg:static
-                    ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed top-0 left-0 z-30 flex flex-col
+                    transition-transform duration-300 lg:translate-x-0
+                    ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
         style={{
           width: "240px",
+          height: "100dvh",
           background: "linear-gradient(to bottom, #0a0a0a, #1a0000)",
           borderRight: "1px solid rgba(255,255,255,0.05)",
         }}
@@ -94,6 +95,9 @@ export default function TrainerLayout() {
           </button>
         </div>
       </aside>
+
+      {/* spacer for sidebar on large screens */}
+      <div className="hidden lg:block shrink-0" style={{ width: "240px" }} />
 
       {/* main content */}
       <div className="flex-1 flex flex-col min-w-0">
