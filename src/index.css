@@ -1,0 +1,16 @@
+@import "tailwindcss";@import "tailwindcss";
+
+@theme {
+  --animate-fadeIn: fadeIn 0.5s ease forwards;
+  --animate-slideUp: slideUp 0.5s ease forwards;
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
