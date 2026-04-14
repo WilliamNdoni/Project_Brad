@@ -7,6 +7,9 @@ import Dashboard from "./pages/trainer/Dashboard";
 import Clients from "./pages/trainer/Clients";
 import Pending from "./pages/trainer/Pending";
 import Payments from "./pages/trainer/Payments";
+import ClientPayments from "./pages/client/C_payments";
+import ClientDashboard from "./pages/client/C_dashboard";
+import ClientLayout from "./pages/client/ClientLayout";
 
 export default function App() {
   return (
@@ -20,6 +23,10 @@ export default function App() {
           <Route path="clients" element={<Clients />} />
           <Route path="pending" element={<Pending />} />
           <Route path="payments" element={<Payments />} />
+        </Route> 
+        <Route path="/client" element={<ClientLayout />}>
+          <Route path="dashboard" element={<ClientDashboard />} />
+          <Route path="payments" element={<ClientPayments />} />
         </Route>
       </Routes>
     </BrowserRouter>
