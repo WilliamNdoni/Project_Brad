@@ -10,7 +10,6 @@ export default function Payments() {
   const [form, setForm] = useState({
     clientId: "",
     amount: "",
-    dueDate: "",
   });
 
   useEffect(() => {
@@ -62,7 +61,6 @@ export default function Payments() {
           body: JSON.stringify({
             clientId: form.clientId,
             amount: form.amount,
-            dueDate: form.dueDate,
           }),
         }
       );
@@ -73,7 +71,7 @@ export default function Payments() {
       // refresh payments
       await fetchData();
       setShowForm(false);
-      setForm({ clientId: "", amount: "", dueDate: "" });
+      setForm({ clientId: "", amount: "" });
     } catch (err) {
       alert(err.message);
     } finally {
@@ -141,32 +139,18 @@ export default function Payments() {
               </select>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
-                  Amount (KES)
-                </label>
-                <input
-                  type="number"
-                  value={form.amount}
-                  onChange={(e) => setForm({ ...form, amount: e.target.value })}
-                  required
-                  placeholder="3000"
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm text-gray-900 outline-none focus:border-red-400"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
-                  Next Due Date
-                </label>
-                <input
-                  type="date"
-                  value={form.dueDate}
-                  onChange={(e) => setForm({ ...form, dueDate: e.target.value })}
-                  required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm text-gray-900 outline-none focus:border-red-400"
-                />
-              </div>
+            <div>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
+                Amount (KES)
+              </label>
+              <input
+                type="number"
+                value={form.amount}
+                onChange={(e) => setForm({ ...form, amount: e.target.value })}
+                required
+                placeholder="3000"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm text-gray-900 outline-none focus:border-red-400"
+              />
             </div>
 
             <div className="flex gap-3">
