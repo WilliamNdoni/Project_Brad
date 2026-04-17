@@ -5,7 +5,7 @@ export default function Pending() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [approving, setApproving] = useState(null);
-  const [form, setForm] = useState({ planType: "monthly", startDate: "" });
+  const [form, setForm] = useState({ planType: "monthly", firstDueDate: "" });
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
@@ -30,11 +30,6 @@ export default function Pending() {
   };
 
   const handleApprove = async (clientUserId) => {
-    if (!form.startDate) {
-      alert("Please select a start date");
-      return;
-    }
-
     setApproving(clientUserId);
 
     try {
@@ -49,8 +44,8 @@ export default function Pending() {
           },
           body: JSON.stringify({
             clientUserId,
-            planType: form.planType,
-            startDate: form.startDate,
+            planType: form.planType || "monthly", // default to monthly if not set
+            firstDueDate: form.firstDueDate || null, // null if not set
           }),
         }
       );
@@ -58,7 +53,6 @@ export default function Pending() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
 
-      // remove approved client from list
       setClients((prev) => prev.filter((c) => c.id !== clientUserId));
       setSelected(null);
     } catch (err) {
@@ -145,16 +139,20 @@ export default function Pending() {
                     </div>
                     <div>
                       <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
-                        Start date
+                        First due date
+                        <span className="text-gray-400 font-normal ml-1">(optional)</span>
                       </label>
                       <input
                         type="date"
-                        value={form.startDate}
+                        value={form.firstDueDate}
                         onChange={(e) =>
-                          setForm({ ...form, startDate: e.target.value })
+                          setForm({ ...form, firstDueDate: e.target.value })
                         }
                         className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm text-gray-900 outline-none focus:border-red-400"
                       />
+                      <p className="text-xs text-gray-400 mt-1">
+                        Only fill in if client has already paid
+                      </p>
                     </div>
                   </div>
                   <div className="flex gap-3">
@@ -175,7 +173,10 @@ export default function Pending() {
                 </div>
               ) : (
                 <button
-                  onClick={() => setSelected(client.id)}
+                  onClick={() => {
+                    setSelected(client.id)
+                    setForm({ planType: "monthly", firstDueDate: "" }) // reset form on open
+                  }}
                   className="w-full py-2 border border-gray-200 hover:bg-gray-50 text-gray-900 rounded-xl text-sm font-semibold transition-colors mt-2"
                 >
                   Review & Approve

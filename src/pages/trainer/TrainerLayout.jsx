@@ -3,7 +3,7 @@ import { useNavigate, Outlet, useLocation } from "react-router-dom";
 
 const navItems = [
   { label: "Dashboard", path: "/trainer/dashboard", icon: "▣" },
-  { label: "Active Clients", path: "/trainer/clients", icon: "◉" },
+  { label: "Clients", path: "/trainer/clients", icon: "◉" },
   { label: "Pending Approvals", path: "/trainer/pending", icon: "◎" },
   { label: "Payments / Transactions", path: "/trainer/payments", icon: "◈" },
 ];

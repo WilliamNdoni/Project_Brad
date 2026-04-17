@@ -7,6 +7,8 @@ import Dashboard from "./pages/trainer/Dashboard";
 import Clients from "./pages/trainer/Clients";
 import Pending from "./pages/trainer/Pending";
 import Payments from "./pages/trainer/Payments";
+import ClientDetail from "./pages/trainer/ClientDetail";
+
 import ClientPayments from "./pages/client/C_payments";
 import ClientDashboard from "./pages/client/C_dashboard";
 import ClientLayout from "./pages/client/ClientLayout";
@@ -21,6 +23,7 @@ export default function App() {
         <Route path="/trainer" element={<TrainerLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="clients" element={<Clients />} />
+          <Route path="clients/:clientId" element={<ClientDetail />} />
           <Route path="pending" element={<Pending />} />
           <Route path="payments" element={<Payments />} />
         </Route> 
